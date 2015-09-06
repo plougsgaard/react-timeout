@@ -1,0 +1,35 @@
+{
+  "name": "react-timeout",
+  "version": "0.0.1",
+  "description": "A version of react-timer-mixin without the mixin part",
+  "homepage": "https://github.com/plougsgaard/react-timeout",
+  "author": "plougsgaard",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/plougsgaard/react-timeout.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plougsgaard/react-timeout/issues"
+  },
+  "main": "dist/timeout.js",
+  "scripts": {
+    "watch": "watchify --transform [ babelify --optional es7.classProperties ] --entry src/entry.js --outfile build/timeout.js -v",
+    "dist": "NODE_ENV=production browserify --transform [ babelify --optional es7.classProperties ] --entry src/entry.js | uglifyjs --compress --mangle --beautify beautify=false,ascii-only=true > dist/timeout.js",
+    "clean": "rm build/timeout.js && rm dist/timeout.js",
+    "lint": "eslint src",
+    "test": "echo \"No tests.\" && exit 0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.23",
+    "babel-eslint": "^4.1.1",
+    "eslint": "^1.3.1",
+    "babelify": "^6.1.3",
+    "browserify": "^11.0.1",
+    "watchify": "^3.3.1"
+  },
+  "dependencies": {
+    "uglifyjs": "^2.4.10"
+  }
+}
