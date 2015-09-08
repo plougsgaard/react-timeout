@@ -1,4 +1,5 @@
 var React = require('react')
+var objectAssign = require('object-assign')
 
 var GLOBAL = typeof window === 'undefined' ? global : window
 
@@ -74,21 +75,26 @@ var ReactTimeout = function (SourceComponent) {
     },
 
     render: function () {
-      var props = this.props;
-      props.reactTimeout = {
-        setTimeout: this.setTimeout,
-        clearTimeout: this.clearTimeout,
+      return React.createElement(
+        SourceComponent,
+        objectAssign(
+          {},
+          this.props,
+          {
+            reactTimeout: {
+              setTimeout: this.setTimeout,
+              clearTimeout: this.clearTimeout,
 
-        setInterval: this.setInterval,
-        clearInterval: this.clearInterval,
+              setInterval: this.setInterval,
+              clearInterval: this.clearInterval,
 
-        setImmediate: this.setImmediate,
-        clearImmediate: this.clearImmediate,
+              setImmediate: this.setImmediate,
+              clearImmediate: this.clearImmediate,
 
-        requestAnimationFrame: this.requestAnimationFrame,
-        cancelAnimationFrame: this.cancelAnimationFrame
-      }
-      return React.createElement(SourceComponent, props)
+              requestAnimationFrame: this.requestAnimationFrame,
+              cancelAnimationFrame: this.cancelAnimationFrame
+            }
+          }))
     }
   })
 }
