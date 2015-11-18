@@ -19,6 +19,7 @@ class Ninja extends Component {
   render () {
     return (
       <div>
+        <h1>Ninja</h1>
         <button onClick={ router(<Turtle />) }>Mount Turtle</button>
         <button onClick={ this.startTimer }>Start Timer</button>
       </div>
@@ -26,17 +27,6 @@ class Ninja extends Component {
   }
 }
 
-class Turtle extends Component {
-  render () {
-    return (
-      <div>
-        <button onClick={ router(<Mutant />) }>Mount Mutant</button>
-      </div>
-    )
-  }
-}
-
-@ReactTimeout
 class Mutant extends Component {
   constructor (props) {
     super(props)
@@ -50,8 +40,22 @@ class Mutant extends Component {
   render () {
     return (
       <div>
+        <h1>Mutant</h1>
         <button onClick={ router(<Ninja />) }>Mount Ninja</button>
         <button onClick={ this.startTimer }>Start Timer</button>
+      </div>
+    )
+  }
+}
+
+const TimeoutMutant = ReactTimeout(Mutant)
+
+class Turtle extends Component {
+  render () {
+    return (
+      <div>
+        <h1>Turtle</h1>
+        <button onClick={ router(<TimeoutMutant />) }>Mount TimeoutMutant</button>
       </div>
     )
   }

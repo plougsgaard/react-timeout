@@ -1,14 +1,12 @@
 # React Timeout
 
 A component wrapper providing **safe-to-use-with-react** versions of
-* setTimeout
-* setInterval
-* setImmediate
-* requestAnimationFrame
+* `setTimeout` & `clearTimeout`
+* `setInterval` & `clearInterval`
+* `setImmediate` & `clearImmediate`
+* `requestAnimationFrame` & `cancelAnimationFrame`
 
-and their inverse counterparts.
-
-**React Timeout** takes care of clearing the timeout when the [React]() component is unmounted.
+When the component is unmounted the wrapper calls the *clear* functions for you.
 
 ## Installation
 
@@ -16,25 +14,28 @@ and their inverse counterparts.
 
 ## Usage
 
+Import and apply **ReactTimeout** either with an annotation or with composition.
+
 ```javascript
 import ReactTimeout from 'react-timeout'
 
 @ReactTimeout
-class A extends Component {
-  constructor (props) {
-    super(props)
-    this.startTimer = this.startTimer.bind(this)
-  }
-  startTimer () {
-    const { setTimeout } = this.props.reactTimeout
-    const id = setTimeout(() => { console.log(`${id} - end`) }, 5000)
-    console.log(`${id} - begin`)
-  }
-  render () {
-    return (..)
-  }
-}
+class Timeoutable extends Component { .. }
+
+class Simple extends Component { .. }
+const Timeoutable = ReactTimeout(Simple)
 ```
+
+Invoke a `setTimeout`. The callback will be cleared if `Timeoutable` unmounts first.
+
+```javascript
+const { setTimeout } = this.props.reactTimeout
+const id = setTimeout(() => {
+  console.log(`The callback with ${id} ended up happening!`)
+}, 5000)
+```
+
+## Example
 
 A full example is available in `example/src/example.js`.
 
