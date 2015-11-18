@@ -1,6 +1,6 @@
 {
   "name": "react-timeout",
-  "version": "0.13.3",
+  "version": "0.14.0",
   "description": "A version of react-timer-mixin without the mixin part",
   "homepage": "https://github.com/plougsgaard/react-timeout",
   "author": "plougsgaard",
