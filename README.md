@@ -22,6 +22,8 @@ import ReactTimeout from 'react-timeout'
 @ReactTimeout
 class Timeoutable extends Component { .. }
 
+// or
+
 class Simple extends Component { .. }
 const Timeoutable = ReactTimeout(Simple)
 ```
@@ -45,7 +47,7 @@ To run the example go to `example/` and enter `npm install && npm start` (assume
 
 ### [react-timer-mixin](https://github.com/reactjs/react-timer-mixin)
 
-The timer mixin recommended by the  [react-native](https://github.com/reactjs/react-native) `README.md`.
+The timer mixin recommended by the  [react-native](https://github.com/facebook/react-native) `README.md`.
 
 ### [Mixins Are Dead. Long Live Composition](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)
 
