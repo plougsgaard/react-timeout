@@ -13,8 +13,26 @@
     "url": "https://github.com/plougsgaard/react-timeout/issues"
   },
   "main": "src/reactTimeout.js",
+  "scripts": {
+    "test": "mocha --compilers js:babel-core/register --require ./test/helper.js 'test/**/*.@(js|jsx)'"
+  },
   "dependencies": {
     "object-assign": "^4.0.1",
     "react": ">=0.13.3 <0.15.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.2.0",
+    "babel-core": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-react": "^6.1.18",
+    "babel-preset-stage-0": "^6.1.18",
+    "chai": "^3.4.1",
+    "chai-immutable": "^1.5.3",
+    "immutable": "^3.7.5",
+    "jsdom": "^7.0.2",
+    "mocha": "^2.3.4",
+    "react": "^0.14.3",
+    "react-addons-test-utils": "^0.14.3",
+    "react-dom": "^0.14.3"
   }
 }
