@@ -1,12 +1,17 @@
 # React Timeout
 
-A component wrapper providing **safe-to-use-with-react** versions of
-* `setTimeout` & `clearTimeout`
-* `setInterval` & `clearInterval`
-* `setImmediate` & `clearImmediate`
-* `requestAnimationFrame` & `cancelAnimationFrame`
+[![travis build](https://img.shields.io/travis/plougsgaard/react-timeout.svg)](https://travis-ci.org/plougsgaard/react-timeout) [![npm version](https://badge.fury.io/js/react-timeout.svg)](https://badge.fury.io/js/react-timeout)
 
-When the component is unmounted the wrapper calls the *clear* functions for you.
+A component wrapper providing **safe-to-use-with-react** versions of
+
+Set                     | Clear
+------------------------|------------------------
+`setTimeout`            | `clearTimeout`
+`setInterval`           | `clearInterval`
+`setImmediate`          | `clearImmediate`
+`requestAnimationFrame` | `cancelAnimationFrame`
+
+When the component is *unmounted* the wrapper calls the **Clear** functions for you.
 
 ## Installation
 
@@ -14,21 +19,23 @@ When the component is unmounted the wrapper calls the *clear* functions for you.
 
 ## Usage
 
-Import and apply **ReactTimeout** either with an annotation or with composition.
+Import and apply **ReactTimeout** either with an annotation
 
 ```javascript
 import ReactTimeout from 'react-timeout'
 
 @ReactTimeout
 class Timeoutable extends Component { .. }
+```
 
-// or
+or with composition
 
+```javascript
 class Simple extends Component { .. }
 const Timeoutable = ReactTimeout(Simple)
 ```
 
-Invoke a `setTimeout`. The callback will be cleared if `Timeoutable` unmounts first.
+Invoke a `setTimeout`.
 
 ```javascript
 const { setTimeout } = this.props.reactTimeout
@@ -36,6 +43,8 @@ const id = setTimeout(() => {
   console.log(`The callback with ${id} ended up happening!`)
 }, 5000)
 ```
+
+If the component unmounts before time elapses the callback is cleared and will never run.
 
 ## Example
 
@@ -47,7 +56,7 @@ To run the example go to `example/` and enter `npm install && npm start` (assume
 
 ### [react-timer-mixin](https://github.com/reactjs/react-timer-mixin)
 
-The timer mixin recommended by the  [react-native](https://github.com/facebook/react-native) `README.md`.
+The timer mixin recommended by the  [react-native](https://github.com/reactjs/react-native) `README.md`.
 
 ### [Mixins Are Dead. Long Live Composition](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)
 
