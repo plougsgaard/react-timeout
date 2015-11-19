@@ -19,7 +19,16 @@ When the component is *unmounted* the wrapper calls the **Clear** functions for 
 
 ## Usage
 
-Import and apply **ReactTimeout** either with an annotation
+Import and apply **ReactTimeout** using composition
+
+```javascript
+import ReactTimeout from 'react-timeout'
+
+class Simple extends Component { .. }
+const Timeoutable = ReactTimeout(Simple)
+```
+
+or an annotation (not recommended)
 
 ```javascript
 import ReactTimeout from 'react-timeout'
@@ -28,29 +37,22 @@ import ReactTimeout from 'react-timeout'
 class Timeoutable extends Component { .. }
 ```
 
-or with composition
-
-```javascript
-class Simple extends Component { .. }
-const Timeoutable = ReactTimeout(Simple)
-```
-
-Invoke a `setTimeout`.
+Invoke a safe `setTimeout` from within the component.
 
 ```javascript
 const { setTimeout } = this.props.reactTimeout
 const id = setTimeout(() => {
-  console.log(`The callback with ${id} ended up happening!`)
+  console.log(`The callback with ${id} fired!`)
 }, 5000)
 ```
 
-If the component unmounts before time elapses the callback is cleared and will never run.
+The callback function will be cleared if the component unmounts before time elapses.
 
 ## Example
 
 A full example is available in `example/src/example.js`.
 
-To run the example go to `example/` and enter `npm install && npm start` (assumes *python* is installed).
+To run the example, clone the repository and run `npm install && npm start` in the `example/` folder.
 
 ## Inspiration
 
