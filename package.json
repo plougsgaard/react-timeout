@@ -1,24 +1,29 @@
 {
   "name": "react-timeout",
-  "version": "0.14.3",
-  "description": "A version of react-timer-mixin without the mixin part",
+  "version": "0.16.0",
+  "description": "Component wrapper for setTimeout et al that cleans up after itself.",
   "homepage": "https://github.com/plougsgaard/react-timeout",
   "author": "plougsgaard",
   "repository": {
     "type": "git",
     "url": "https://github.com/plougsgaard/react-timeout.git"
   },
+  "keywords": [
+    "react",
+    "reactjs",
+    "native",
+    "timer"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/plougsgaard/react-timeout/issues"
   },
-  "main": "src/reactTimeout.js",
+  "main": "src/web.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require ./test/helper.js 'test/**/*.@(js|jsx)'"
   },
   "dependencies": {
-    "object-assign": "^4.0.1",
-    "react": ">=0.13.3 <0.15.0"
+    "object-assign": "^4.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.2.0",

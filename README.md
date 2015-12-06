@@ -17,24 +17,34 @@ When the component is *unmounted* the wrapper calls the **Clear** functions for 
 
 `npm install --save react-timeout`
 
-## Usage
-
-Import and apply **ReactTimeout** using composition
+## React
 
 ```javascript
 import ReactTimeout from 'react-timeout'
+```
 
-class Simple extends Component { .. }
-const Timeoutable = ReactTimeout(Simple)
+## React Native
+
+The library also works with React Native `^0.16` and probably earlier versions:
+
+```javascript
+import ReactTimeout from 'react-timeout/native'
+```
+
+## Usage
+
+Apply **ReactTimeout** using composition
+
+```javascript
+class Example extends Component { .. }
+const WithReactTimeout = ReactTimeout(Example)
 ```
 
 or an annotation (not recommended)
 
 ```javascript
-import ReactTimeout from 'react-timeout'
-
 @ReactTimeout
-class Timeoutable extends Component { .. }
+class WithReactTimeout extends Component { .. }
 ```
 
 Invoke a safe `setTimeout` from within the component.
@@ -46,7 +56,7 @@ const id = setTimeout(() => {
 }, 5000)
 ```
 
-The callback function will be cleared if the component unmounts before time elapses.
+The callback function will be cleared if the component unmounts before the `5000ms` elapse.
 
 ## Example
 
@@ -62,4 +72,4 @@ The timer mixin recommended by the  [react-native](https://github.com/reactjs/re
 
 ### [Mixins Are Dead. Long Live Composition](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)
 
-[Dan Abramov](https://github.com/gaearon)'s musing on why a project like this might be a good idea.
+[Dan Abramov](https://github.com/gaearon)'s article promoting stuff like this package
