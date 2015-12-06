@@ -82,33 +82,36 @@ describe('Timing', () => {
     expect(q.textContent).to.equal('none')
   })
 
-  it('fires immediately', () => {
+  it('fires immediately', (done) => {
     const b = scryRenderedDOMComponentsWithClass(rendering, 'test0')[0]
     Simulate.click(b)
 
     setTimeout(() => {
       const q = scryRenderedDOMComponentsWithClass(rendering, 'status')[0]
       expect(q.textContent).to.equal('test0')
+      setTimeout(done)
     })
   })
 
-  it('is immediately cleared', () => {
+  it('is immediately cleared', (done) => {
     const b = scryRenderedDOMComponentsWithClass(rendering, 'test1')[0]
     Simulate.click(b)
 
     setTimeout(() => {
       const q = scryRenderedDOMComponentsWithClass(rendering, 'status')[0]
       expect(q.textContent).to.equal('none')
+      setTimeout(done)
     })
   })
 
-  it('has not fired yet', () => {
+  it('has not fired yet', (done) => {
     const b = scryRenderedDOMComponentsWithClass(rendering, 'test2')[0]
     Simulate.click(b)
 
     setTimeout(() => {
       const q = scryRenderedDOMComponentsWithClass(rendering, 'status')[0]
       expect(q.textContent).to.equal('none')
+      setTimeout(done)
     })
   })
 
