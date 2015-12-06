@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/plougsgaard/react-timeout/issues"
   },
-  "main": "src/reactTimeout.js",
+  "main": "src/web.js",
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require ./test/helper.js 'test/**/*.@(js|jsx)'"
   },
