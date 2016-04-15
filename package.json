@@ -1,6 +1,6 @@
 {
   "name": "react-timeout",
-  "version": "0.16.0",
+  "version": "0.16.1",
   "description": "Component wrapper for setTimeout et al that cleans up after itself.",
   "homepage": "https://github.com/plougsgaard/react-timeout",
   "author": "plougsgaard",

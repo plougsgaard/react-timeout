@@ -25,7 +25,9 @@ import ReactTimeout from 'react-timeout'
 
 ## React Native
 
-The library also works with React Native `^0.16` and probably earlier versions:
+From `^0.18` and onwards *it just works*.
+
+For previous versions, import it like so:
 
 ```javascript
 import ReactTimeout from 'react-timeout/native'
@@ -64,12 +66,8 @@ A full example is available in `example/src/example.js`.
 
 To run the example, clone the repository and run `npm install && npm start` in the `example/` folder.
 
-## Inspiration
+## Similar
 
 ### [react-timer-mixin](https://github.com/reactjs/react-timer-mixin)
 
-The timer mixin recommended by the  [react-native](https://github.com/reactjs/react-native) `README.md`.
-
-### [Mixins Are Dead. Long Live Composition](https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750)
-
-[Dan Abramov](https://github.com/gaearon)'s article promoting stuff like this package
+The timer mixin recommended by the  [react-native](https://github.com/facebook/react-native) `README.md`.
