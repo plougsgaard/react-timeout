@@ -20,7 +20,7 @@ describe('Functions', () => {
         clearInterval,
         clearImmediate,
         cancelAnimationFrame
-      } = this.props.reactTimeout
+      } = this.props
       return (
         <div>
           <p className="setTimeout">{typeof setTimeout}</p>

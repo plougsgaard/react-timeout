@@ -19,38 +19,38 @@ describe('Timing', () => {
       }
     }
     test0 = () => {
-      const { setTimeout } = this.props.reactTimeout
+      const { setTimeout } = this.props
       setTimeout(() => {
         this.setState({ status: 'test0' })
       })
     }
     test1 = () => {
-      const { setTimeout, clearTimeout } = this.props.reactTimeout
+      const { setTimeout, clearTimeout } = this.props
       const id = setTimeout(() => {
         this.setState({ status: 'test1' })
       })
       clearTimeout(id)
     }
     test2 = () => {
-      const { setTimeout } = this.props.reactTimeout
+      const { setTimeout } = this.props
       setTimeout(() => {
         this.setState({ status: 'test2' })
       }, 250)
     }
     test3 = () => {
-      const { setTimeout } = this.props.reactTimeout
+      const { setTimeout } = this.props
       setTimeout(() => {
         window.uglyMutableLeakyVariableTest3 = 'test3'
       }, 100)
     }
     test4 = () => {
-      const { setTimeout } = this.props.reactTimeout
+      const { setTimeout } = this.props
       setTimeout(() => {
         window.uglyMutableLeakyVariableTest4 = 'test4'
       }, 250)
     }
     test5 = () => {
-      const { setTimeout } = this.props.reactTimeout
+      const { setTimeout } = this.props
       setTimeout(() => {
         window.uglyMutableLeakyVariableTest5++
       }, 250)
