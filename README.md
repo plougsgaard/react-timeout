@@ -2,7 +2,11 @@
 
 [![travis build](https://img.shields.io/travis/plougsgaard/react-timeout.svg)](https://travis-ci.org/plougsgaard/react-timeout) [![npm version](https://badge.fury.io/js/react-timeout.svg)](https://badge.fury.io/js/react-timeout)
 
-A component wrapper providing **safe-to-use-with-react** versions of
+> Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op.
+
+Seeing a lot of the above? If so this might be useful!
+
+React Timeout is a higher order component for [React](https://github.com/facebook/react) and [React Native](https://github.com/facebook/react-native) providing the wrapped component with **safe** versions of
 
 Set                     | Clear
 ------------------------|------------------------
@@ -11,9 +15,9 @@ Set                     | Clear
 `setImmediate`          | `clearImmediate`
 `requestAnimationFrame` | `cancelAnimationFrame`
 
-When the component is *unmounted* the wrapper calls the **Clear** functions for you.
+When the wrapped component is *unmounted*, any lingering timers will be canceled automatically.
 
-## Installation
+# Installation
 
 `npm install --save react-timeout`
 
@@ -33,41 +37,82 @@ For previous versions, import it like so:
 import ReactTimeout from 'react-timeout/native'
 ```
 
-## Usage
+# Examples
 
-Apply **ReactTimeout** using composition
+## React "Classic" (verbose)
+
+This simulates a light switch that takes `5000ms` to switch between `on` and `!on`.
 
 ```javascript
-class Example extends Component { .. }
-const WithReactTimeout = ReactTimeout(Example)
+import ReactTimeout from 'react-timeout'
+
+var Example = React.createClass({
+  toggleOn: function () {
+    this.setState({ on: !this.state.on })
+  },
+  handleClick: function (e) {
+    this.props.setTimeout(this.toggleOn, 5000)
+  },
+  render: function () {
+    return (
+      <button
+        style={{ backgroundColor: (this.state.on ? 'yellow' : 'gray') }}
+        onClick={this.handleClick}>Click me!</button>
+    )
+  }
+})
+
+export default ReactTimeout(Example)
 ```
 
-or an annotation (not recommended)
+Had we just called the regular old `setTimeout` and unmounted the component, the callback would still fire and try setting the state of an unmounted component. However since we use `ReactTimeout` the `this.props.setTimeout` will get canceled the moment the component unmounts.
+
+## ES6 Classes
+
+```javascript
+class Example extends Component {
+  render() {
+    return (
+      <button
+        onClick={() => this.props.setTimeout(..)}>Click me!</button>
+    )
+  }
+}
+export default ReactTimeout(Example)
+```
+
+## Functional Stateless Components
+
+```javascript
+const Example = ({ setTimeout }) => ({
+  <button
+    onClick={() => setTimeout(..)}>Click me!</button>
+})
+export default ReactTimeout(Example)
+```
+
+## With ES7 Annotations
 
 ```javascript
 @ReactTimeout
-class WithReactTimeout extends Component { .. }
+class Example extends Component { .. }
 ```
-
-Invoke a safe `setTimeout` from within the component.
 
 ```javascript
-const { setTimeout } = this.props.reactTimeout
-const id = setTimeout(() => {
-  console.log(`The callback with ${id} fired!`)
-}, 5000)
+@ReactTimeout
+var Example = React.createClass({ .. })
 ```
 
-The callback function will be cleared if the component unmounts before the `5000ms` elapse.
+# Something similar
 
-## Example
+## [react-timer-mixin](https://github.com/reactjs/react-timer-mixin)
 
-A full example is available in `example/src/example.js`.
+The timer mixin recommended by the  [react-native](https://github.com/facebook/react-native) docs.
 
-To run the example, clone the repository and run `npm install && npm start` in the `example/` folder.
+# Changes
 
-## Similar
+## Changes in ^1.0.0
 
-### [react-timer-mixin](https://github.com/reactjs/react-timer-mixin)
+Since the major version changed from `0` to `1` the only breaking change is dropping the `reactTimeout` namespace.
 
-The timer mixin recommended by the  [react-native](https://github.com/facebook/react-native) `README.md`.
+For example: `this.props.reactTimeout.setTimeout` becomes `this.props.setTimeout`.
