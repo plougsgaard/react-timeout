@@ -1,8 +1,6 @@
 # React Timeout
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/plougsgaard/react-timeout.svg)](https://greenkeeper.io/)
-
-[![travis build](https://img.shields.io/travis/plougsgaard/react-timeout.svg)](https://travis-ci.org/plougsgaard/react-timeout) [![npm version](https://badge.fury.io/js/react-timeout.svg)](https://badge.fury.io/js/react-timeout)
+[![Greenkeeper badge](https://badges.greenkeeper.io/plougsgaard/react-timeout.svg)](https://greenkeeper.io/) [![travis build](https://img.shields.io/travis/plougsgaard/react-timeout.svg)](https://travis-ci.org/plougsgaard/react-timeout) [![npm version](https://badge.fury.io/js/react-timeout.svg)](https://badge.fury.io/js/react-timeout)
 
 > Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op.
 
