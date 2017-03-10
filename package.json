@@ -36,10 +36,10 @@
     "chai": "^3.4.1",
     "chai-immutable": "^1.5.3",
     "immutable": "^3.8.0",
-    "jsdom": "^7.0.2",
-    "mocha": "^2.3.4",
-    "react": "^0.14.8",
-    "react-addons-test-utils": "^0.14.8",
-    "react-dom": "^0.14.8"
+    "jsdom": "^9.11.0",
+    "mocha": "^3.2.0",
+    "react": "^15.4.2",
+    "react-addons-test-utils": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
