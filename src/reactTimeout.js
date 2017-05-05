@@ -1,3 +1,4 @@
+import createReactClass from 'create-react-class';
 var objectAssign = require('object-assign')
 
 var createReactTimeout = function (React) {
@@ -52,7 +53,7 @@ var createReactTimeout = function (React) {
   }
 
   var ReactTimeout = function (SourceComponent) {
-    return React.createClass({
+    return createReactClass({
       displayName: 'ReactTimeout',
 
       setTimeout: _setTimeout,

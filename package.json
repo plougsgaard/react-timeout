@@ -25,6 +25,7 @@
     "test": "mocha --compilers js:babel-core/register --require ./test/helper.js 'test/**/*.@(js|jsx)'"
   },
   "dependencies": {
+    "create-react-class": "^15.5.2",
     "object-assign": "^4.0.1"
   },
   "devDependencies": {

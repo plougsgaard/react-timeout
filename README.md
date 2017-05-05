@@ -45,8 +45,9 @@ This simulates a light switch that takes `5000ms` to switch between `on` and `!o
 
 ```javascript
 import ReactTimeout from 'react-timeout'
+import createReactClass from 'create-react-class';
 
-var Example = React.createClass({
+var Example = createReactClass({
   toggleOn: function () {
     this.setState({ on: !this.state.on })
   },
@@ -100,7 +101,7 @@ class Example extends Component { .. }
 
 ```javascript
 @ReactTimeout
-var Example = React.createClass({ .. })
+var Example = createReactClass({ .. })
 ```
 
 # Something similar
