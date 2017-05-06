@@ -1,4 +1,4 @@
-import createReactClass from 'create-react-class';
+var createReactClass = require('create-react-class')
 var objectAssign = require('object-assign')
 
 var createReactTimeout = function (React) {
