@@ -1,6 +1,6 @@
 {
   "name": "react-timeout",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HOC for React and React Native providing versions of setTimeout etc. that cancels when unmounted.",
   "homepage": "https://github.com/plougsgaard/react-timeout",
   "author": "plougsgaard",
