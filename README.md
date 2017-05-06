@@ -4,6 +4,8 @@
 
 > Warning: setState(...): Can only update a mounted or mounting component. This usually means you called setState() on an unmounted component. This is a no-op.
 
+> Warning: Can only update a mounted or mounting component. This usually means you called setState, replaceState, or forceUpdate on an unmounted component. This is a no-op.
+
 Seeing a lot of the above? If so this might be useful!
 
 React Timeout is a higher order component for [React](https://github.com/facebook/react) and [React Native](https://github.com/facebook/react-native) providing the wrapped component with **safe** versions of
@@ -21,74 +23,55 @@ When the wrapped component is *unmounted*, any lingering timers will be canceled
 
 `npm install --save react-timeout`
 
-## React
+## React / React Native
 
 ```javascript
 import ReactTimeout from 'react-timeout'
-```
-
-## React Native
-
-From `^0.18` and onwards *it just works*.
-
-For previous versions, import it like so:
-
-```javascript
-import ReactTimeout from 'react-timeout/native'
 ```
 
 # Examples
 
-## React "Classic" (verbose)
+## ES6 Classes - "The Light Switch"
 
-This simulates a light switch that takes `5000ms` to switch between `on` and `!on`.
+The component simulates a light switch. It has a state `on` which is `true` or `false`. When the button is clicked it waits `5000ms` before switching the `on` state.
 
 ```javascript
+import React from 'react'
 import ReactTimeout from 'react-timeout'
-import createReactClass from 'create-react-class';
 
-var Example = createReactClass({
-  toggleOn: function () {
-    this.setState({ on: !this.state.on })
-  },
-  handleClick: function (e) {
-    this.props.setTimeout(this.toggleOn, 5000)
-  },
-  render: function () {
-    return (
-      <button
-        style={{ backgroundColor: (this.state.on ? 'yellow' : 'gray') }}
-        onClick={this.handleClick}>Click me!</button>
-    )
+class LightSwitchExample extends React.Component {
+  state = {
+    on: false
   }
-})
-
-export default ReactTimeout(Example)
-```
-
-Had we just called the regular old `setTimeout` and unmounted the component, the callback would still fire and try setting the state of an unmounted component. However since we use `ReactTimeout` the `this.props.setTimeout` will get canceled the moment the component unmounts.
-
-## ES6 Classes
-
-```javascript
-class Example extends Component {
-  render() {
+  toggle = () => {
+    this.setState({ on: !this.state.on })
+  }
+  handleClick = (e) => {
+    this.props.setTimeout(this.toggle, 5000) // call the `toggle` function after 5000ms
+  }
+  render () {
     return (
-      <button
-        onClick={() => this.props.setTimeout(..)}>Click me!</button>
+      <div style={{ backgroundColor: (this.state.on ? 'yellow' : 'gray') }}>
+        <button onClick={this.handleClick}>Click me!</button>
+      </div>
     )
   }
 }
-export default ReactTimeout(Example)
 ```
+
+If the component is unmounted before the `5000ms` is up, the timeout is canceled by `ReactTimeout`.
+
+Had we just called the regular old `setTimeout`, the callback `toggle` would still fire and try setting the state of an unmounted component.
 
 ## Functional Stateless Components
 
 ```javascript
-const Example = ({ setTimeout }) => ({
-  <button
-    onClick={() => setTimeout(..)}>Click me!</button>
-})
+const Example = (props) => {
+  return (
+    <button
+      onClick={() => props.setTimeout(..)}>Click me!</button>
+  )
+}
 export default ReactTimeout(Example)
 ```
 
@@ -96,12 +79,14 @@ export default ReactTimeout(Example)
 
 ```javascript
 @ReactTimeout
-class Example extends Component { .. }
-```
-
-```javascript
-@ReactTimeout
-var Example = createReactClass({ .. })
+class Example extends React.Component {
+  render () {
+    return (
+      <button
+        onClick={() => this.props.setTimeout(..)}>Click me!</button>
+    )
+  }
+}
 ```
 
 # Something similar
@@ -110,10 +95,12 @@ var Example = createReactClass({ .. })
 
 The timer mixin recommended by the  [react-native](https://github.com/facebook/react-native) docs.
 
-# Changes
+# Caveats
 
-## Changes in ^1.0.0
+## React Native 0.17 and below
 
-Since the major version changed from `0` to `1` the only breaking change is dropping the `reactTimeout` namespace.
+If you're using a version of React Native that is `0.17` or below you have to import from the `/native` namespace.
 
-For example: `this.props.reactTimeout.setTimeout` becomes `this.props.setTimeout`.
+```javascript
+import ReactTimeout from 'react-timeout/native' // only for react-native 0.17 or below
+```
