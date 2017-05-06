@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { render, unmountComponentAtNode } from 'react-dom'
-import { Simulate, renderIntoDocument, scryRenderedDOMComponentsWithClass } from 'react-addons-test-utils'
+import { Simulate, renderIntoDocument, scryRenderedDOMComponentsWithClass } from 'react-dom/test-utils'
 import { expect } from 'chai'
 
 import ReactTimeout from '..'
