@@ -57,6 +57,7 @@ class LightSwitchExample extends React.Component {
     )
   }
 }
+export default ReactTimeout(LightSwitchExample)
 ```
 
 If the component is unmounted before the `5000ms` is up, the timeout is canceled by `ReactTimeout`.
