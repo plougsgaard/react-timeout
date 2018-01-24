@@ -1,5 +1,6 @@
 var createReactClass = require('create-react-class')
 var objectAssign = require('object-assign')
+var hoistNonReactStatics = require('hoist-non-react-statics')
 
 var createReactTimeout = function (React) {
   var GLOBAL = typeof window === 'undefined' ? global : window
@@ -53,7 +54,7 @@ var createReactTimeout = function (React) {
   }
 
   var ReactTimeout = function (SourceComponent) {
-    return createReactClass({
+    var Component = createReactClass({
       displayName: 'ReactTimeout',
 
       setTimeout: _setTimeout,
@@ -101,6 +102,7 @@ var createReactTimeout = function (React) {
             }))
       }
     })
+    return hoistNonReactStatics(Component, SourceComponent)
   }
 
   return ReactTimeout
