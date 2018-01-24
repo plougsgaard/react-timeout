@@ -1,5 +1,6 @@
 var createReactClass = require('create-react-class')
 var objectAssign = require('object-assign')
+var hoistNonReactStatics = require('hoist-non-react-statics')
 
 var createReactTimeout = function (React) {
   var GLOBAL = typeof window === 'undefined' ? global : window
@@ -38,7 +39,7 @@ var createReactTimeout = function (React) {
 
   var _intervals = '_ReactTimeout_intervals'
   var _clearInterval = clearer(GLOBAL.clearInterval, _intervals)
-  var _setInterval = setter(GLOBAL.setInterval, function () {}, _intervals)
+  var _setInterval = setter(GLOBAL.setInterval, function () { }, _intervals)
 
   var _immediates = '_ReactTimeout_immediates'
   var _clearImmediate = clearer(GLOBAL.clearImmediate, _immediates)
@@ -53,7 +54,7 @@ var createReactTimeout = function (React) {
   }
 
   var ReactTimeout = function (SourceComponent) {
-    return createReactClass({
+    var Component = createReactClass({
       displayName: 'ReactTimeout',
 
       setTimeout: _setTimeout,
@@ -96,6 +97,7 @@ var createReactTimeout = function (React) {
             }))
       }
     })
+    return hoistNonReactStatics(Component, SourceComponent)
   }
 
   return ReactTimeout
