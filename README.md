@@ -90,6 +90,9 @@ class Example extends React.Component {
 }
 ```
 
+## To access the wrapped instance
+If you need access to the component wrapped by `ReactTimeout`, use `component.getWrappedInstance()`.
+
 # Something similar
 
 ## [react-timer-mixin](https://github.com/reactjs/react-timer-mixin)

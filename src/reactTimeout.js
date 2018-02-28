@@ -75,6 +75,10 @@ var createReactTimeout = function (React) {
         cloneArray(this[_rafs]).forEach(this.cancelAnimationFrame)
       },
 
+      getWrappedInstance() {
+        return this.wrappedInstance;
+      },
+
       render: function () {
         return React.createElement(
           SourceComponent,
@@ -82,6 +86,7 @@ var createReactTimeout = function (React) {
             {},
             this.props,
             {
+              ref: (component) => { this.wrappedInstance = component; },
               setTimeout: this.setTimeout,
               clearTimeout: this.clearTimeout,
 
