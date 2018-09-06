@@ -24,6 +24,13 @@
   "scripts": {
     "test": "mocha --compilers js:babel-core/register --require ./test/helper.js 'test/**/*.@(js|jsx)'"
   },
+  "files": [
+    "src/web.js",
+    "src/native.js",
+    "src/reactTimeout.js",
+    "native.js",
+    "README.md"
+  ],
   "dependencies": {
     "create-react-class": "^15.5.2",
     "hoist-non-react-statics": "^2.3.1",
