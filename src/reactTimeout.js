@@ -10,7 +10,9 @@ var createReactTimeout = function (React) {
       var optionalArguments = Array.prototype.slice.call(arguments, 2)
       var id = _setter(function () {
         _clearer.call(this, id)
-        callback.apply(this, optionalArguments)
+        if (typeof callback === 'function') {
+          callback.apply(this, optionalArguments)
+        }
       }.bind(this), delta)
 
       if (!this[array]) {
