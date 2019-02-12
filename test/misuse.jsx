@@ -24,13 +24,27 @@ describe('Misuse', () => {
       this.props.setTimeout('not a function')
     }
     test2 = () => {
-      this.props.setTimeout()
+      this.props.setTimeout(null)
+      this.props.setTimeout({})
+      this.props.setTimeout(undefined)
+      this.props.setTimeout(NaN)
+      this.props.setTimeout(() => {}, null)
+      this.props.setTimeout(() => {}, {})
+      this.props.setTimeout(() => {}, undefined)
+      this.props.setTimeout(() => {}, NaN)
+    }
+    test3 = () => {
+      this.props.setTimeout(() => {
+        window.misuse__uglyMutableLeakyVariableTest = 'negatory'
+      }, -5000)
     }
     render = () => {
       return (
         <div>
           <button className="test0" onClick={this.test0}>test0</button>
           <button className="test1" onClick={this.test1}>test1</button>
+          <button className="test2" onClick={this.test2}>test2</button>
+          <button className="test3" onClick={this.test3}>test3</button>
         </div>
       )
     }
@@ -50,7 +64,7 @@ describe('Misuse', () => {
     setTimeout(() => {
       expect(window.misuse__uglyMutableLeakyVariableTest).to.equal('pass')
       setTimeout(done)
-    }, 300)
+    }, 50)
   })
 
   it('can be called with a string without crashing', (done) => {
@@ -59,7 +73,25 @@ describe('Misuse', () => {
     setTimeout(() => {
       expect(window.misuse__uglyMutableLeakyVariableTest).to.equal('pass')
       setTimeout(done)
-    }, 300)
+    }, 50)
+  })
+
+  it('can be called with a lot of crap without crashing', (done) => {
+    const b = scryRenderedDOMComponentsWithClass(rendering, 'test2')[0]
+    Simulate.click(b)
+    setTimeout(() => {
+      expect(window.misuse__uglyMutableLeakyVariableTest).to.equal('pass')
+      setTimeout(done)
+    }, 50)
+  })
+
+  it('can be called with a negative number (which defaults to 0)', (done) => {
+    const b = scryRenderedDOMComponentsWithClass(rendering, 'test3')[0]
+    Simulate.click(b)
+    setTimeout(() => {
+      expect(window.misuse__uglyMutableLeakyVariableTest).to.equal('negatory')
+      setTimeout(done)
+    }, 50)
   })
 
 })
