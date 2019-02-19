@@ -26,12 +26,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-push": "npm run lint && npm test"
+      "pre-push": "npm run standard && npm test"
     }
   },
   "scripts": {
     "test": "jest",
-    "lint": "standard"
+    "standard": "standard"
   },
   "files": [
     "src/web.js",
