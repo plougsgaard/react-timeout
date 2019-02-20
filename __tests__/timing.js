@@ -9,8 +9,8 @@ import * as testUtils from 'react-testing-library'
 
 import reactTimeout from '..'
 
-let __experiment2 = 'unchanged'
-let __experiment3 = 'unchanged'
+let __experimentSetTimeout = 'unchanged'
+let __experimentClearTimeout = 'unchanged'
 
 class TestClass extends React.Component {
   static defaultProp = { delay: 100, experiment: 'experiment1' }
@@ -21,10 +21,10 @@ class TestClass extends React.Component {
     }, this.props.delay)
   }
   experiment2 = () => {
-    this.props.setTimeout(() => { __experiment2 = 'changed' }, this.props.delay)
+    this.props.setTimeout(() => { __experimentSetTimeout = 'changed' }, this.props.delay)
   }
   experiment3 = () => {
-    const id = this.props.setTimeout(() => { __experiment3 = 'changed' }, this.props.delay)
+    const id = this.props.setTimeout(() => { __experimentClearTimeout = 'changed' }, this.props.delay)
     this.props.clearTimeout(id)
   }
   render () {
@@ -53,54 +53,54 @@ describe('timing', () => {
     expect(node).toBeInTheDocument() // from jest-dom/extend-expect
   })
   test('remains unchanged when checked immediately', () => {
-    __experiment2 = 'unchanged'
+    __experimentSetTimeout = 'unchanged'
     let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={0} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
-    expect(__experiment2).toBe('unchanged')
+    expect(__experimentSetTimeout).toBe('unchanged')
   })
   test('is changed if checked after a tick', (done) => {
-    __experiment2 = 'unchanged'
+    __experimentSetTimeout = 'unchanged'
     let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={0} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     setTimeout(() => {
-      expect(__experiment2).toBe('changed')
+      expect(__experimentSetTimeout).toBe('changed')
       done()
     })
   })
   test('is unchanged when cleared immediately', (done) => {
-    __experiment3 = 'unchanged'
+    __experimentClearTimeout = 'unchanged'
     let t = testUtils.render(<TestClassWithTimeout experiment='experiment3' delay={0} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     setTimeout(() => {
-      expect(__experiment3).toBe('unchanged')
+      expect(__experimentClearTimeout).toBe('unchanged')
       done()
     })
   })
   test('it is unmounted before it can fire', (done) => {
-    __experiment2 = 'unchanged'
+    __experimentSetTimeout = 'unchanged'
     let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={50} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     setTimeout(() => {
       t.unmount()
     }, 25)
     setTimeout(() => {
-      expect(__experiment2).toBe('unchanged')
+      expect(__experimentSetTimeout).toBe('unchanged')
       done()
     }, 75)
   })
-  test('can cancel 250 callbacks by unmounting why not', (done) => {
-    __experiment2 = 'unchanged'
+  test('can cancel 100 callbacks by unmounting why not', (done) => {
+    __experimentSetTimeout = 'unchanged'
     let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={250} />)
     let button = t.getByText('RunExperiment')
     let i = 0
-    for (i = 0; i < 250; i++) {
+    for (i = 0; i < 100; i++) {
       testUtils.fireEvent.click(button)
     }
     setTimeout(() => {
       t.unmount()
     }, 100)
     setTimeout(() => {
-      expect(__experiment2).toBe('unchanged')
+      expect(__experimentSetTimeout).toBe('unchanged')
       done()
     }, 500)
   })
