@@ -80,7 +80,7 @@ var createReactTimeout = function (React) {
       },
 
       getWrappedInstance: function () {
-        return this.wrappedInstance;
+        return this.wrappedInstance
       },
 
       render: function () {
@@ -90,7 +90,7 @@ var createReactTimeout = function (React) {
             {},
             this.props,
             {
-              ref: function (component) { this.wrappedInstance = component; }.bind(this),
+              ref: function (component) { this.wrappedInstance = component }.bind(this),
               setTimeout: this.setTimeout,
               clearTimeout: this.clearTimeout,
 
