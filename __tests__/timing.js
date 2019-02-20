@@ -76,4 +76,32 @@ describe('timing', () => {
       done()
     })
   })
+  test('it is unmounted before it can fire', (done) => {
+    __experiment2 = 'unchanged'
+    let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={50} />)
+    testUtils.fireEvent.click(t.getByText('RunExperiment'))
+    setTimeout(() => {
+      t.unmount()
+    }, 25)
+    setTimeout(() => {
+      expect(__experiment2).toBe('unchanged')
+      done()
+    }, 75)
+  })
+  test('can cancel 250 callbacks by unmounting why not', (done) => {
+    __experiment2 = 'unchanged'
+    let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={250} />)
+    let button = t.getByText('RunExperiment')
+    let i = 0
+    for (i = 0; i < 250; i++) {
+      testUtils.fireEvent.click(button)
+    }
+    setTimeout(() => {
+      t.unmount()
+    }, 100)
+    setTimeout(() => {
+      expect(__experiment2).toBe('unchanged')
+      done()
+    }, 500)
+  })
 })
