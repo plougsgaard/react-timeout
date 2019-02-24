@@ -58,7 +58,7 @@
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-test-renderer": "16.8.3",
-    "react-testing-library": "5.9.0",
+    "react-testing-library": "6.0.0",
     "standard": "12.0.1"
   }
 }
