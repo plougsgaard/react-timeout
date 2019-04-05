@@ -60,7 +60,7 @@
     "react": "16.8.4",
     "react-dom": "16.8.4",
     "react-test-renderer": "16.8.4",
-    "react-testing-library": "6.0.0",
+    "react-testing-library": "6.1.1",
     "standard": "12.0.1"
   }
 }
