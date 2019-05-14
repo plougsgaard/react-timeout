@@ -53,7 +53,7 @@
     "babel-eslint": "10.0.1",
     "babel-jest": "24.1.0",
     "babel-polyfill": "6.26.0",
-    "husky": "2.2.0",
+    "husky": "2.3.0",
     "jest": "24.1.0",
     "jest-dom": "3.2.2",
     "jshint": "2.10.2",
