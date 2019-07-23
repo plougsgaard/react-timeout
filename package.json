@@ -47,8 +47,8 @@
     "object-assign": "^4.0.1"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.4.4",
-    "@babel/preset-env": "7.4.5",
+    "@babel/plugin-proposal-class-properties": "7.5.5",
+    "@babel/preset-env": "7.5.5",
     "@babel/preset-react": "7.0.0",
     "babel-eslint": "10.0.2",
     "babel-jest": "24.1.0",
