@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "7.7.0",
-    "@babel/preset-env": "7.6.3",
+    "@babel/preset-env": "7.7.0",
     "@babel/preset-react": "7.6.3",
     "babel-eslint": "10.0.3",
     "babel-jest": "24.1.0",
