@@ -59,7 +59,7 @@
     "jshint": "2.10.3",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "react-test-renderer": "16.11.0",
+    "react-test-renderer": "16.12.0",
     "react-testing-library": "6.0.4",
     "standard": "14.3.1"
   }
