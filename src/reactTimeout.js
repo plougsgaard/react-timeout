@@ -57,6 +57,7 @@ var createReactTimeout = function (React) {
   }
 
   var ReactTimeout = function (SourceComponent) {
+    var wrapperRef = React.useRef(null);
     var Component = createReactClass({
       displayName: 'ReactTimeout',
 
@@ -80,7 +81,7 @@ var createReactTimeout = function (React) {
       },
 
       getWrappedInstance: function () {
-        return this.wrappedInstance
+        return this.wrapperRef;
       },
 
       render: function () {
@@ -90,7 +91,7 @@ var createReactTimeout = function (React) {
             {},
             this.props,
             {
-              ref: function (component) { this.wrappedInstance = component }.bind(this),
+              ref: wrapperRef,
               setTimeout: this.setTimeout,
               clearTimeout: this.clearTimeout,
 
