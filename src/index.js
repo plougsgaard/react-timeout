@@ -50,7 +50,7 @@ var _immediates = '_ReactTimeout_immediates'
 var _rafs = '_ReactTimeout_rafs'
 
 function withReactTimeout (WrappedComponent) {
-  var ReactTimeout = React.forwardRef(function (props, ref) {
+  var ReactTimeout = hoistNonReactStatics(React.forwardRef(function (props, ref) {
     var timerState = {}
 
     var clearTimeout = React.useCallback(clearer(GLOBAL.clearTimeout, _timeouts, timerState), [])
@@ -93,9 +93,9 @@ function withReactTimeout (WrappedComponent) {
       }
     )
     return React.createElement(WrappedComponent, newProps)
-  })
+  }), WrappedComponent)
   ReactTimeout.displayName = 'ReactTimeout(' + getDisplayName(WrappedComponent) + ')'
-  return hoistNonReactStatics(ReactTimeout, WrappedComponent)
+  return ReactTimeout
 }
 
 module.exports = withReactTimeout
