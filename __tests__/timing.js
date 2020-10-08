@@ -20,17 +20,21 @@ class TestClass extends React.Component {
       this.setState({ result: 'completed' })
     }, this.props.delay)
   }
+
   experiment2 = () => {
     this.props.setTimeout(() => { __experimentSetTimeout = 'changed' }, this.props.delay)
   }
+
   experiment3 = () => {
     const id = this.props.setTimeout(() => { __experimentClearTimeout = 'changed' }, this.props.delay)
     this.props.clearTimeout(id)
   }
+
   render () {
+    const handleClick = this[this.props.experiment]
     return (
       <div>
-        <button onClick={this[this.props.experiment]}>RunExperiment</button>
+        <button onClick={handleClick}>RunExperiment</button>
         {(this.state.result === 'completed') && (<div>completed</div>)}
       </div>
     )
@@ -44,7 +48,7 @@ afterEach(testUtils.cleanup)
 
 describe('timing', () => {
   test('fires immediately', async () => {
-    let t = testUtils.render(<TestClassWithTimeout experiment='experiment1' delay={0} />)
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment1' delay={0} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
 
     // by the power of some voodoo magic this wait until a node with 'completed' appears
@@ -54,13 +58,13 @@ describe('timing', () => {
   })
   test('remains unchanged when checked immediately', () => {
     __experimentSetTimeout = 'unchanged'
-    let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={0} />)
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={0} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     expect(__experimentSetTimeout).toBe('unchanged')
   })
   test('is changed if checked after a tick', (done) => {
     __experimentSetTimeout = 'unchanged'
-    let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={0} />)
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={0} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     setTimeout(() => {
       expect(__experimentSetTimeout).toBe('changed')
@@ -69,7 +73,7 @@ describe('timing', () => {
   })
   test('is unchanged when cleared immediately', (done) => {
     __experimentClearTimeout = 'unchanged'
-    let t = testUtils.render(<TestClassWithTimeout experiment='experiment3' delay={0} />)
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment3' delay={0} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     setTimeout(() => {
       expect(__experimentClearTimeout).toBe('unchanged')
@@ -78,7 +82,7 @@ describe('timing', () => {
   })
   test('it is unmounted before it can fire', (done) => {
     __experimentSetTimeout = 'unchanged'
-    let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={50} />)
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={50} />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     setTimeout(() => {
       t.unmount()
@@ -90,8 +94,8 @@ describe('timing', () => {
   })
   test('can cancel 100 callbacks by unmounting why not', (done) => {
     __experimentSetTimeout = 'unchanged'
-    let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={250} />)
-    let button = t.getByText('RunExperiment')
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={250} />)
+    const button = t.getByText('RunExperiment')
     let i = 0
     for (i = 0; i < 100; i++) {
       testUtils.fireEvent.click(button)
