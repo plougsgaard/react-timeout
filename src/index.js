@@ -94,7 +94,7 @@ function withReactTimeout (WrappedComponent) {
     )
     return React.createElement(WrappedComponent, newProps)
   })
-  ReactTimeout.displayName = `ReactTimeout(${getDisplayName(WrappedComponent)})`
+  ReactTimeout.displayName = 'ReactTimeout(' + getDisplayName(WrappedComponent) + ')'
   return hoistNonReactStatics(ReactTimeout, WrappedComponent)
 }
 
