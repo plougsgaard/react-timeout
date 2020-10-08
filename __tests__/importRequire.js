@@ -22,11 +22,11 @@ afterEach(cleanup)
 
 describe('can be used with `import` and `require`', () => {
   test('using `import`', () => {
-    let t = render(<TestClassWithImport queryFunction='setTimeout' />)
+    const t = render(<TestClassWithImport queryFunction='setTimeout' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
   test('using `require`', () => {
-    let t = render(<TestClassWithRequire queryFunction='setTimeout' />)
+    const t = render(<TestClassWithRequire queryFunction='setTimeout' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
 })

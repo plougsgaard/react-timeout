@@ -20,35 +20,35 @@ afterEach(cleanup)
 
 describe('has all the functions`', () => {
   test('setTimeout', () => {
-    let t = render(<TestClassWithTimeout queryFunction='setTimeout' />)
+    const t = render(<TestClassWithTimeout queryFunction='setTimeout' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
   test('clearTimeout', () => {
-    let t = render(<TestClassWithTimeout queryFunction='clearTimeout' />)
+    const t = render(<TestClassWithTimeout queryFunction='clearTimeout' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
   test('setInterval', () => {
-    let t = render(<TestClassWithTimeout queryFunction='setInterval' />)
+    const t = render(<TestClassWithTimeout queryFunction='setInterval' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
   test('clearInterval', () => {
-    let t = render(<TestClassWithTimeout queryFunction='clearInterval' />)
+    const t = render(<TestClassWithTimeout queryFunction='clearInterval' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
   test('setImmediate', () => {
-    let t = render(<TestClassWithTimeout queryFunction='setImmediate' />)
+    const t = render(<TestClassWithTimeout queryFunction='setImmediate' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
   test('clearImmediate', () => {
-    let t = render(<TestClassWithTimeout queryFunction='clearImmediate' />)
+    const t = render(<TestClassWithTimeout queryFunction='clearImmediate' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
   test('requestAnimationFrame', () => {
-    let t = render(<TestClassWithTimeout queryFunction='requestAnimationFrame' />)
+    const t = render(<TestClassWithTimeout queryFunction='requestAnimationFrame' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
   test('cancelAnimationFrame', () => {
-    let t = render(<TestClassWithTimeout queryFunction='cancelAnimationFrame' />)
+    const t = render(<TestClassWithTimeout queryFunction='cancelAnimationFrame' />)
     expect(t.getByTestId('function-type').textContent).toBe('function')
   })
 })

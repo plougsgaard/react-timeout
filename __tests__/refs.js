@@ -17,9 +17,10 @@ const TestClassWithTimeout = reactTimeout(TestClass)
 
 // The tests
 
-describe('wrappedInstance`', () => {
-  test('can access the wrapped instance', () => {
-    let t = ReactTestUtils.renderIntoDocument(<TestClassWithTimeout />)
-    expect(t.getWrappedInstance().myLittleFunction()).toBe(42)
+describe('refs`', () => {
+  test('can access the refs', () => {
+    const ref = React.createRef()
+    ReactTestUtils.renderIntoDocument(<TestClassWithTimeout ref={ref} />)
+    expect(ref.current.myLittleFunction()).toBe(42)
   })
 })

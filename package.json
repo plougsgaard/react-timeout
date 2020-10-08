@@ -20,7 +20,7 @@
   "bugs": {
     "url": "https://github.com/plougsgaard/react-timeout/issues"
   },
-  "main": "src/web.js",
+  "main": "src/index.js",
   "standard": {
     "parser": "babel-eslint"
   },
@@ -35,14 +35,10 @@
     "standard": "standard"
   },
   "files": [
-    "src/web.js",
-    "src/native.js",
-    "src/reactTimeout.js",
-    "native.js",
+    "src/index.js",
     "README.md"
   ],
   "dependencies": {
-    "create-react-class": "^15.5.2",
     "hoist-non-react-statics": "^2.3.1",
     "object-assign": "^4.0.1"
   },

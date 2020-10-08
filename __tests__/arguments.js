@@ -14,12 +14,15 @@ class TestClass extends React.Component {
   experiment1 = () => {
     this.props.setTimeout((arg1) => { __experimentArguments = arg1 }, this.props.delay, this.props.argument)
   }
+
   experiment2 = () => {
     this.props.setTimeout((arg1, arg2, arg3) => { __experimentArguments = arg3 }, this.props.delay, undefined, undefined, this.props.argument)
   }
+
   render () {
+    const handleClick = this[this.props.experiment]
     return (
-      <button onClick={this[this.props.experiment]}>RunExperiment</button>
+      <button onClick={handleClick}>RunExperiment</button>
     )
   }
 }
@@ -32,7 +35,7 @@ afterEach(testUtils.cleanup)
 describe('arguments', () => {
   test('transfers 1 argument', (done) => {
     __experimentArguments = 'unchanged'
-    let t = testUtils.render(<TestClassWithTimeout experiment='experiment1' delay={0} argument={'myValue'} />)
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment1' delay={0} argument='myValue' />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     setTimeout(() => {
       expect(__experimentArguments).toBe('myValue')
@@ -41,7 +44,7 @@ describe('arguments', () => {
   })
   test('transfers 3 arguments', (done) => {
     __experimentArguments = 'unchanged'
-    let t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={0} argument={'myValue'} />)
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment2' delay={0} argument='myValue' />)
     testUtils.fireEvent.click(t.getByText('RunExperiment'))
     setTimeout(() => {
       expect(__experimentArguments).toBe('myValue')
