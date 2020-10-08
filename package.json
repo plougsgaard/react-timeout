@@ -42,7 +42,6 @@
     "README.md"
   ],
   "dependencies": {
-    "create-react-class": "^15.5.2",
     "hoist-non-react-statics": "^2.3.1",
     "object-assign": "^4.0.1"
   },
