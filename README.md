@@ -99,9 +99,19 @@ If you need access to the component wrapped by `ReactTimeout`, use `component.ge
 
 The timer mixin recommended by the  [react-native](https://github.com/facebook/react-native) docs.
 
-# Caveats
+# Version Compatability
+
+## React 16.3+
+
+Use version `2+`.
+
+## React < 16
+
+Use version `<2`.
 
 ## React Native 0.17 and below
+
+Only supported by major version `1`.
 
 If you're using a version of React Native that is `0.17` or below you have to import from the `/native` namespace.
 
