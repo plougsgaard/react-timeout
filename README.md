@@ -21,7 +21,18 @@ When the wrapped component is *unmounted*, any lingering timers will be canceled
 
 # Installation
 
-`npm install --save react-timeout`
+```
+npm install --save react-timeout
+```
+
+## Version Compatibility
+
+| React     |  React Timeout |
+| :-------  | :------------: |
+| `16.3`+   | `2+`           |
+| <`16.3`   | `1.x`          |
+
+# Usage
 
 ## React / React Native
 
@@ -76,7 +87,7 @@ const Example = (props) => {
 export default ReactTimeout(Example)
 ```
 
-## With ES7 Annotations
+## With Annotations
 
 ```javascript
 @ReactTimeout
@@ -90,8 +101,11 @@ class Example extends React.Component {
 }
 ```
 
-## To access the wrapped instance
-If you need access to the component wrapped by `ReactTimeout`, use `component.getWrappedInstance()`.
+## Accessing the wrapped instance
+
+You can access the wrapped instance using `React.createRef` from version `2+`.
+
+If you're using version `1.x` you can access the wrapped instance with `component.getWrappedInstance()`.
 
 # Something similar
 
@@ -99,19 +113,9 @@ If you need access to the component wrapped by `ReactTimeout`, use `component.ge
 
 The timer mixin recommended by the  [react-native](https://github.com/facebook/react-native) docs.
 
-# Version Compatability
-
-## React 16.3+
-
-Use version `2+`.
-
-## React < 16
-
-Use version `<2`.
-
 ## React Native 0.17 and below
 
-Only supported by major version `1`.
+Only supported by version `1.x`.
 
 If you're using a version of React Native that is `0.17` or below you have to import from the `/native` namespace.
 
