@@ -11,6 +11,7 @@ import reactTimeout from '..'
 
 let __experimentSetTimeout = 'unchanged'
 let __experimentClearTimeout = 'unchanged'
+let __experimentSetInterval = 0
 
 class TestClass extends React.Component {
   static defaultProp = { delay: 100, experiment: 'experiment1' }
@@ -28,6 +29,10 @@ class TestClass extends React.Component {
   experiment3 = () => {
     const id = this.props.setTimeout(() => { __experimentClearTimeout = 'changed' }, this.props.delay)
     this.props.clearTimeout(id)
+  }
+
+  experiment4 = () => {
+    this.props.setInterval(() => { __experimentSetInterval++ }, this.props.delay)
   }
 
   render () {
@@ -105,6 +110,19 @@ describe('timing', () => {
     }, 100)
     setTimeout(() => {
       expect(__experimentSetTimeout).toBe('unchanged')
+      done()
+    }, 500)
+  })
+  test('setInterval gets called at each interval', (done) => {
+    __experimentSetInterval = 0
+    const t = testUtils.render(<TestClassWithTimeout experiment='experiment4' delay={30} />)
+    const button = t.getByText('RunExperiment')
+    testUtils.fireEvent.click(button)
+    setTimeout(() => {
+      t.unmount()
+    }, 400)
+    setTimeout(() => {
+      expect(__experimentSetInterval).toBeGreaterThan(5)
       done()
     }, 500)
   })
