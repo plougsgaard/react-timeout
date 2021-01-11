@@ -9,7 +9,9 @@ var setter = function (_setter, _clearer, arrayKey, timerState) {
   return function (callback, delta) {
     var optionalArguments = Array.prototype.slice.call(arguments, 2)
     var id = _setter(function () {
-      _clearer.call(this, id)
+      if (_clearer) {
+        _clearer.call(this, id)
+      }
       if (typeof callback === 'function') {
         callback.apply(this, optionalArguments)
       }
@@ -57,7 +59,7 @@ function withReactTimeout (WrappedComponent) {
     var setTimeout = React.useCallback(setter(GLOBAL.setTimeout, clearTimeout, _timeouts, timerState), [])
 
     var clearInterval = React.useCallback(clearer(GLOBAL.clearInterval, _intervals, timerState), [])
-    var setInterval = React.useCallback(setter(GLOBAL.setInterval, clearInterval, _intervals, timerState), [])
+    var setInterval = React.useCallback(setter(GLOBAL.setInterval, null, _intervals, timerState), [])
 
     var clearImmediate = React.useCallback(clearer(GLOBAL.clearImmediate, _immediates, timerState), [])
     var setImmediate = React.useCallback(setter(GLOBAL.setImmediate, clearImmediate, _immediates, timerState), [])
